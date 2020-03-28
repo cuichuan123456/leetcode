@@ -29,7 +29,7 @@ int left_bound(int[] nums, int target) {
         }
     }
     // 最后要检查 left 越界的情况
-    if (left >= nums.length || nums[left] != target)
+    if (left >= nums.length || nums[left] != target)//值得思考的边界
         return -1;
     return left;
 }
