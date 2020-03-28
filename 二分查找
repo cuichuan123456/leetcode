@@ -53,7 +53,7 @@ int right_bound(int[] nums, int target) {
         return -1;
     return right;
 }
-输出两个端点：
+输出两个端点：leetcode 34
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
