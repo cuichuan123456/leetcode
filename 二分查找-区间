@@ -1,0 +1,19 @@
+x的平方根：
+
+class Solution {
+public:
+    int mySqrt(int x) {
+     long left=0;
+     long right=x/2+1;
+     long temp;
+     while(left<right){
+         long mid=left+(right-left+1)/2;
+         temp=mid*mid;
+         if(temp>x){
+             right=mid-1;
+         }else
+         left=mid;
+     }
+     return left;
+    }
+};
