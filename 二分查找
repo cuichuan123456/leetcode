@@ -73,7 +73,7 @@ public:
             if(nums[m]<=target) l=m+1;//重要的等于号；上方两种方法可以去掉
             else r=m;
         }
-        res[1]=l-1;
+        res[1]=l-1;//要知道为啥减一；
         return res;
     }
 };
