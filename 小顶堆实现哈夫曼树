@@ -1,0 +1,49 @@
+哈夫曼树：
+大顶堆：
+    priority_queue<int> q;
+    for( int i= 0; i< 10; ++i ) q.push(i);
+    while( !q.empty() ){
+        cout<<q.top()<<endl;
+        q.pop();
+    }
+小顶堆：
+    priority_queue<int, vector<int>, greater<int> > q;//vector容器向量，
+    for( int i= 0; i< 10; ++i ) q.push(10-i);
+    while( !q.empty() ){
+        cout << q.top() << endl;
+        q.pop();
+    }
+
+#include "queue"
+#include "stdio.h"
+using namespace std;
+
+priority_queue<int,vector<int>,greater<int> > Q;
+void main(){
+	int n;
+	while(scanf("%d",&n)){
+		while(Q.empty()==false){
+			Q.pop();
+		}
+		int i;
+		for(i=0;i<n;i++){
+			int x;
+			scanf("%d",&x);
+			Q.push(x);
+		}
+		int ans=0;
+		while(Q.size()>1){
+			int a=Q.top();
+			Q.pop();
+			int b=Q.top();
+			Q.pop();
+			ans+=a+b;
+			Q.push(a+b);
+		
+		}
+		printf("%d\n",ans);
+	
+	}
+
+
+}
