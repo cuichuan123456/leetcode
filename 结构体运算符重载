@@ -1,0 +1,12 @@
+
+struct goods{
+  int j,f,s;
+  /*降序：
+  bool operator <(const goods &A) const{
+    return s>A.s;
+  }*/
+  //升序
+  bool operator <(const goods &A) const{
+    return s<A.s;
+  }
+};
