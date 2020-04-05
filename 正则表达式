@@ -1,0 +1,39 @@
+class Solution {
+public:
+    //记忆表
+    vector<vector<int>>memo;
+    bool isMatch(string s, string p) {
+        // 大小+1的目的是因为memo有边界限制，在递归出口是只判断了pi，但没有限制si
+        memo = vector<vector<int>>(s.size() + 1, vector<int>(p.size() + 1, -1));
+        return helper(0, 0, s, p);
+    }
+    bool helper(int si, int pi, string s, string p) {
+        //递归出口
+        //当si==s.size() 且 pi < p.size()时 可能p中还有“*”字符 可以令前面的字符出现0次以匹配s
+        if(pi == p.size()) {
+            return si == s.size();
+        }
+        //如果判断过了直接返回存储的结果
+        if(memo[si][pi] != -1) { 
+            return memo[si][pi]; 
+        } 
+        bool res = false; //整个结果是否匹配
+        bool cur_match = false; //当前字符是否匹配
+        if(si < s.size()) {
+            if(s[si] == p[pi] || p[pi] == '.') {
+                cur_match = true;
+            }
+        }
+        //判断下一个字符是否'*'
+        if((pi + 1) < p.size() && p[pi + 1] == '*') {
+            // 考虑只需两种情况：
+            // 情况1：当前字符出现0次：跳过pattern中的当前字符和下一个"*"==>helper(si, pi + 2, s, p)
+            // 情况2：当前字符出现1次：当前是否匹配 && 将字符s向后移动一位是否匹配==>cur_match && helper(si + 1, pi, s, p)
+            res = helper(si, pi + 2, s, p) || (cur_match && helper(si + 1, pi, s, p));
+        } else {
+            res = cur_match && helper(si + 1, pi + 1, s, p); //下一个不是"*"正常向后匹配就好
+        }
+        memo[si][pi] = res;
+        return res;
+    }
+};
