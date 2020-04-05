@@ -1,0 +1,18 @@
+两数求和：
+
+//array = [1,2,3,4,5,6,7,8,9]; array is sorted in a increasing order
+//target = 10;
+int len = array.size();
+int p1 = 0, p2 = len - 1; //p1 points to the start of the array and p2 points to the end
+//the search stops when the two pointers meet each other
+while(p1 < p2){
+    if(array[p1] + array[p2] < target){
+        p1++;
+    }else if(array[p1] + array[p2] == target){
+        cout << p1 << p2 << endl;
+        p1++,p2--;
+    }else{
+        p2--;
+    }
+}
+
