@@ -3,10 +3,11 @@ public:
     void rotate(vector<vector<int>>& matrix) {
         int n = matrix.size();
         if(n == 0) { return; }
-        int r = (n>>1)-1; //左上角区域的最大行下标，
+        int r = (n>>1)-1; //左上角区域的最大行下标，//不知道这个是什么意思
         int c = (n-1)>>1; //左上角区域的最大列下标，行列下标从 0 开始。
         for(int i = r; i >= 0; --i) {
             for(int j = c; j >= 0; --j) {
+            //四个位置对换：
                 swap(matrix[i][j], matrix[j][n-i-1]);
                 swap(matrix[i][j], matrix[n-i-1][n-j-1]);
                 swap(matrix[i][j], matrix[n-j-1][i]);
@@ -14,3 +15,24 @@ public:
         }
     }
 };
+//编写一种算法，若M × N矩阵中某个元素为0，则将其所在的行与列清零。
+//需要根据原数组的元素对原数组进行修改；
+需要从新建立数组进行复制
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        vector<vector<int>> newMatrix = matrix;//可直接复制厉害
+        for(int i = 0; i < matrix.size(); i++)
+            for(int j = 0; j < matrix[i].size(); j++)
+                if(matrix[i][j]==0){
+                    for(int k = 0; k < matrix.size(); k++)
+                        newMatrix[k][j] = 0;
+                    for(int m = 0; m < matrix[i].size(); m++)
+                        newMatrix[i][m] = 0;
+                }
+                
+        matrix = newMatrix;
+    }
+};
+
+
