@@ -1,0 +1,53 @@
+/*
+// Employee info
+class Employee {
+public:
+    // It's the unique ID of each node.
+    // unique id of this employee
+    int id;
+    // the importance value of this employee
+    int importance;
+    // the id of direct subordinates
+    vector<int> subordinates;
+};
+*/
+class Solution {
+public:
+    int getImportance(vector<Employee*> employees, int id) {//星号使用；88888888888888888888888888888
+        map<int,Employee*> mp;//结构体为啥带星号；
+        for(auto e:employees){
+            mp[e->id]=e; 
+        }
+        queue<Employee*> q;
+        q.push(mp[id]);
+        int result=0;
+        while(!q.empty()){
+            Employee *e=q.front();
+            q.pop();
+            result+=e->importance;
+            for(int sid:e->subordinates){
+                q.push(mp[sid]);
+            }
+        }
+        return result; 
+    }
+};
+//递归直接调用
+class Solution {
+public:
+    int getImportance(vector<Employee*> employees, int id) {
+      for(auto e:employees){
+            if(e->id==id){
+              if(employees.size()==0){
+                  return e->importance;
+              }  
+              for(int sid:e->subordinates){
+                  e->importance+=getImportance(employees,sid);
+              }
+              return e->importance;
+            }
+        }
+        return 0;///////
+    }
+
+};
