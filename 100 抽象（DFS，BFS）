@@ -32,7 +32,8 @@ public:
         return result; 
     }
 };
-//递归直接调用
+//递归
+dfs直接调用
 class Solution {
 public:
     int getImportance(vector<Employee*> employees, int id) {
@@ -51,3 +52,31 @@ public:
     }
 
 };
+dfs间接调用：
+class Solution {
+public:
+    int dfs(unordered_map<int, Employee*>& mp, int id)
+    {
+        if (mp.count(id) == 0 || mp[id] == nullptr) return 0;
+        int ans = mp[id]->importance;
+        for (auto n : mp[id]->subordinates)
+        {
+            ans += dfs(mp, n);
+        }
+        return ans;
+    }
+
+    int getImportance(vector<Employee*> employees, int id)
+    {
+        unordered_map<int, Employee*> mp;
+        for (auto p : employees)
+        {
+            if (p == nullptr) continue;
+            mp[p->id] = p;
+        }
+
+        return dfs(mp, id);
+    }
+};
+
+
