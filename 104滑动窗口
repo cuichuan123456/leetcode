@@ -84,5 +84,22 @@ public class Solution {
     }
 }
 
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+       int  n=s.length(),ans=0;
+       unordered_map<char,int> map;
+       for(int end=0,start=0;end<n;end++){
+           char alpha=s[end];
+           if(map[alpha]){
+               start=max(map[alpha],start);
+           }
+           ans=max(ans,end-start+1);
+           map[s[end]]=end+1;//why当前在字符串中的位置；
+       }
+       return ans;
+    }
+};
+
 
 
