@@ -25,15 +25,14 @@ public:
 };
 98. 验证二叉搜索树
 给定一个二叉树，判断其是否是一个有效的二叉搜索树。
-
 假设一个二叉搜索树具有如下特征：
-
 节点的左子树只包含小于当前节点的数。
 节点的右子树只包含大于当前节点的数。
 所有左子树和右子树自身必须也是二叉搜索树。
 代码块
 class Solution {
 public:
+    vector<int> t;
     bool isValidBST(TreeNode* root) {
         if(root == NULL) return true;
         //vector<int> t;
@@ -42,28 +41,26 @@ public:
             if(t[i + 1] <= t[i]) return false;
         }
         return true;
-
     }   
-
     void dfs(TreeNode* root){
         if(root -> left) dfs(root->left);
         t.push_back(root -> val);
         if(root -> right) dfs(root->right);
     }
-private:
-    vector<int> t;
 };
 //方法：if(root){
 }
 
 //判断包含子树：
 便利加判断
-
+//双层递归判断子树；
+//若，A或者B有一个不存在返回false；
+//深度优先遍历判断是否为子树；
 class Solution {
 public:
     bool isSubStructure(TreeNode* A, TreeNode* B) {
         if (!A || !B) return false;
-        return dfs(A, B) || isSubStructure(A->left, B) || isSubStructure(A->right, B);
+        return dfs(A, B) || isSubStructure(A->left, B) || isSubStructure(A->right, B);//双层递归判断；
     }
     
     bool dfs(TreeNode* A, TreeNode* B) {
